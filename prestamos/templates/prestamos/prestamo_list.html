@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Préstamos</h1>
+<a href="{% url 'prestamo_create' %}">Nuevo préstamo</a>
+<table>
+    <tr>
+        <th>Código</th>
+        <th>Material</th>
+        <th>Usuario</th>
+        <th>Fecha préstamo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for prestamo in object_list %}
+    <tr>
+        <td>{{ prestamo.codigo }}</td>
+        <td>{{ prestamo.material.nombre }}</td>
+        <td>{{ prestamo.usuario.nombre }} {{ prestamo.usuario.apellidos }}</td>
+        <td>{{ prestamo.fecha_prestamo }}</td>
+        <td>{{ prestamo.estado }}</td>
+        <td>
+            <a href="{% url 'prestamo_detail' prestamo.pk %}">Detalle</a> |
+            <a href="{% url 'prestamo_update' prestamo.pk %}">Editar</a> |
+            {% if prestamo.estado != 'devuelto' %}
+            <a href="{% url 'prestamo_cerrar' prestamo.pk %}">Cerrar</a> |
+            {% endif %}
+            <a href="{% url 'prestamo_delete' prestamo.pk %}">Borrar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+

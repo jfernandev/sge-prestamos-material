@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGE - Préstamos de Material</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #4CAF50;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button, .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 2px;
+        }
+        button:hover, .btn:hover {
+            background-color: #45a049;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        ul {
+            background-color: white;
+            padding: 20px;
+            list-style-type: none;
+        }
+        ul li {
+            padding: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/materiales/">Materiales</a>
+        <a href="/usuarios/">Usuarios</a>
+        <a href="/prestamos/">Préstamos</a>
+        <a href="/incidencias/">Incidencias</a>
+        <a href="/admin/">Admin</a>
+    </nav>
+    <div style="max-width: 1200px; margin: 0 auto; background-color: white; padding: 20px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Materiales</h1>
+<a href="{% url 'material_create' %}">Nuevo material</a>
+<table>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for material in object_list %}
+    <tr>
+        <td>{{ material.codigo }}</td>
+        <td><a href="{% url 'material_detail' material.pk %}">{{ material.nombre }}</a></td>
+        <td>{{ material.categoria }}</td>
+        <td>{{ material.estado }}</td>
+        <td>
+            <a href="{% url 'material_update' material.pk %}">Editar</a> |
+            <a href="{% url 'material_delete' material.pk %}">Borrar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+

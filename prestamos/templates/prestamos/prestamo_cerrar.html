@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Cerrar préstamo</h1>
+<p>¿Confirmas que el material "{{ prestamo.material.nombre }}" ha sido devuelto por "{{ prestamo.usuario.nombre }} {{ prestamo.usuario.apellidos }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, cerrar préstamo</button>
+    <a href="{% url 'prestamo_list' %}" class="btn" style="background-color: #808080;">Cancelar</a>
+</form>
+{% endblock %}

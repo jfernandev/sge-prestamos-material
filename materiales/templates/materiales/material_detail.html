@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Detalle de material</h1>
+<ul>
+    <li><strong>Código:</strong> {{ object.codigo }}</li>
+    <li><strong>Nombre:</strong> {{ object.nombre }}</li>
+    <li><strong>Descripción:</strong> {{ object.descripcion }}</li>
+    <li><strong>Categoría:</strong> {{ object.categoria }}</li>
+    <li><strong>Estado:</strong> {{ object.estado }}</li>
+    <li><strong>Ubicación:</strong> {{ object.ubicacion }}</li>
+    <li><strong>Fecha de alta:</strong> {{ object.fecha_alta }}</li>
+</ul>
+<a href="{% url 'material_update' object.pk %}" class="btn">Editar</a>
+<a href="{% url 'material_delete' object.pk %}" class="btn" style="background-color: #f44336;">Borrar</a>
+<a href="{% url 'material_list' %}" class="btn" style="background-color: #008CBA;">Volver al listado</a>
+{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+<h1>Detalle de material</h1>
+<ul>
+    <li><strong>Código:</strong> {{ object.codigo }}</li>
+    <li><strong>Nombre:</strong> {{ object.nombre }}</li>
+    <li><strong>Descripción:</strong> {{ object.descripcion }}</li>
+    <li><strong>Categoría:</strong> {{ object.categoria }}</li>
+    <li><strong>Estado:</strong> {{ object.estado }}</li>
+    <li><strong>Ubicación:</strong> {{ object.ubicacion }}</li>
+    <li><strong>Fecha de alta:</strong> {{ object.fecha_alta }}</li>
+</ul>
+<a href="{% url 'material_update' object.pk %}" class="btn">Editar</a>
+<a href="{% url 'material_delete' object.pk %}" class="btn" style="background-color: #f44336;">Borrar</a>
+<a href="{% url 'material_list' %}" class="btn" style="background-color: #008CBA;">Volver</a>
+{% endblock %}
