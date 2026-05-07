@@ -1,42 +1,32 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
-from django.urls import reverse_lazy
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.utils import timezone
 from .models import Prestamo
+from .serializers import PrestamoSerializer, PrestamoCreateSerializer
 
-class PrestamoListView(ListView):
-    model = Prestamo
-    template_name = 'prestamos/prestamo_list.html'
 
-class PrestamoDetailView(DetailView):
-    model = Prestamo
-    template_name = 'prestamos/prestamo_detail.html'
-
-class PrestamoCreateView(CreateView):
-    model = Prestamo
-    fields = ['codigo', 'fecha_prestamo', 'fecha_prevista_devolucion', 'usuario', 'material', 'observaciones']
-    template_name = 'prestamos/prestamo_form.html'
-    success_url = reverse_lazy('prestamo_list')
-
-class PrestamoUpdateView(UpdateView):
-    model = Prestamo
-    fields = ['codigo', 'fecha_prestamo', 'fecha_prevista_devolucion', 'fecha_real_devolucion', 'estado', 'usuario', 'material', 'observaciones']
-    template_name = 'prestamos/prestamo_form.html'
-    success_url = reverse_lazy('prestamo_list')
-
-class PrestamoCerrarView(View):
-    def get(self, request, pk):
-        prestamo = get_object_or_404(Prestamo, pk=pk)
-        return render(request, 'prestamos/prestamo_cerrar.html', {'prestamo': prestamo})
+class PrestamoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para CRUD completo de Prestamo.
+    Incluye acción personalizada para cerrar préstamos.
+    """
+    queryset = Prestamo.objects.all()
     
-    def post(self, request, pk):
-        prestamo = get_object_or_404(Prestamo, pk=pk)
+    def get_serializer_class(self):
+        if self.action in ['create', 'update', 'partial_update']:
+            return PrestamoCreateSerializer
+        return PrestamoSerializer
+    
+    @action(detail=True, methods=['post'])
+    def cerrar(self, request, pk=None):
+        """
+        Acción personalizada para cerrar un préstamo.
+        POST /api/prestamos/{id}/cerrar/
+        """
+        prestamo = self.get_object()
         prestamo.fecha_real_devolucion = timezone.now().date()
         prestamo.estado = 'devuelto'
         prestamo.save()
-        return redirect('prestamo_list')
-
-class PrestamoDeleteView(DeleteView):
-    model = Prestamo
-    template_name = 'prestamos/prestamo_confirm_delete.html'
-    success_url = reverse_lazy('prestamo_list')
+        serializer = self.get_serializer(prestamo)
+        return Response(serializer.data)

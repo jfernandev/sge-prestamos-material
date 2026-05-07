@@ -1,29 +1,18 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from rest_framework import viewsets
 from .models import Material
+from .serializers import MaterialSerializer
 
-class MaterialListView(ListView):
-    model = Material
-    template_name = 'materiales/material_list.html'
 
-class MaterialDetailView(DetailView):
-    model = Material
-    template_name = 'materiales/material_detail.html'
-
-class MaterialCreateView(CreateView):
-    model = Material
-    fields = ['codigo', 'nombre', 'descripcion', 'categoria', 'estado', 'ubicacion']
-    template_name = 'materiales/material_form.html'
-    success_url = reverse_lazy('material_list')
-
-class MaterialUpdateView(UpdateView):
-    model = Material
-    fields = ['codigo', 'nombre', 'descripcion', 'categoria', 'estado', 'ubicacion']
-    template_name = 'materiales/material_form.html'
-    success_url = reverse_lazy('material_list')
-
-class MaterialDeleteView(DeleteView):
-    model = Material
-    template_name = 'materiales/material_confirm_delete.html'
-    success_url = reverse_lazy('material_list')
+class MaterialViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para CRUD completo de Material.
+    Endpoints:
+    - GET /api/materiales/ (listar)
+    - POST /api/materiales/ (crear)
+    - GET /api/materiales/{id}/ (detalle)
+    - PUT /api/materiales/{id}/ (actualizar completo)
+    - PATCH /api/materiales/{id}/ (actualizar parcial)
+    - DELETE /api/materiales/{id}/ (borrar)
+    """
+    queryset = Material.objects.all()
+    serializer_class = MaterialSerializer

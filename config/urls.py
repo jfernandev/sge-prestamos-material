@@ -17,13 +17,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from rest_framework.routers import DefaultRouter
+
+from materiales.views import MaterialViewSet
+from usuarios.views import UsuarioViewSet
+from prestamos.views import PrestamoViewSet
+from incidencias.views import IncidenciaViewSet
+
+# Router para la API REST
+router = DefaultRouter()
+router.register(r'materiales', MaterialViewSet, basename='material')
+router.register(r'usuarios', UsuarioViewSet, basename='usuario')
+router.register(r'prestamos', PrestamoViewSet, basename='prestamo')
+router.register(r'incidencias', IncidenciaViewSet, basename='incidencia')
 
 urlpatterns = [
+    # Frontend (home page) - Aquí se cargará Vue.js
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('inicio/', TemplateView.as_view(template_name='home.html'), name='inicio'),
+    
+    # Admin Django
     path('admin/', admin.site.urls),
-    path('materiales/', include('materiales.urls')),
-    path('usuarios/', include('usuarios.urls')),
-    path('prestamos/', include('prestamos.urls')),
-    path('incidencias/', include('incidencias.urls')),
+    
+    # API REST
+    path('api/', include(router.urls)),
 ]
