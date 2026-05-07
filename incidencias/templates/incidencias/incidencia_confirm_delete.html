@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Confirmar borrado</h1>
+<p>¿Seguro que quieres borrar la incidencia "{{ object.codigo }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #f44336;">Sí, borrar</button>
+    <a href="{% url 'incidencia_list' %}" class="btn" style="background-color: #808080;">Cancelar</a>
+</form>
+{% endblock %}

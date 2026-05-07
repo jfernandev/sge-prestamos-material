@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Detalle de préstamo</h1>
+<ul>
+    <li><strong>Código:</strong> {{ object.codigo }}</li>
+    <li><strong>Material:</strong> {{ object.material.nombre }}</li>
+    <li><strong>Usuario:</strong> {{ object.usuario.nombre }} {{ object.usuario.apellidos }}</li>
+    <li><strong>Fecha préstamo:</strong> {{ object.fecha_prestamo }}</li>
+    <li><strong>Fecha prevista devolución:</strong> {{ object.fecha_prevista_devolucion }}</li>
+    <li><strong>Fecha real devolución:</strong> {{ object.fecha_real_devolucion|default:"Pendiente" }}</li>
+    <li><strong>Estado:</strong> {{ object.estado }}</li>
+    <li><strong>Observaciones:</strong> {{ object.observaciones }}</li>
+</ul>
+<a href="{% url 'prestamo_update' object.pk %}" class="btn">Editar</a>
+{% if object.estado != 'devuelto' %}
+<a href="{% url 'prestamo_cerrar' object.pk %}" class="btn">Cerrar</a>
+{% endif %}
+<a href="{% url 'prestamo_delete' object.pk %}" class="btn" style="background-color:#f44336;">Borrar</a>
+<a href="{% url 'prestamo_list' %}" class="btn" style="background-color:#008CBA;">Volver</a>
+{% endblock %}

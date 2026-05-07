@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Incidencias</h1>
+<a href="{% url 'incidencia_create' %}" class="btn">Nueva incidencia</a>
+<table>
+    <tr>
+        <th>Código</th>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Préstamo</th>
+        <th>Acciones</th>
+    </tr>
+    {% for incidencia in object_list %}
+    <tr>
+        <td>{{ incidencia.codigo }}</td>
+        <td>{{ incidencia.fecha }}</td>
+        <td>{{ incidencia.tipo_incidencia }}</td>
+        <td>{{ incidencia.prestamo.codigo }}</td>
+        <td>
+            <a href="{% url 'incidencia_detail' incidencia.pk %}">Detalle</a> |
+            <a href="{% url 'incidencia_update' incidencia.pk %}">Editar</a> |
+            <a href="{% url 'incidencia_delete' incidencia.pk %}">Borrar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

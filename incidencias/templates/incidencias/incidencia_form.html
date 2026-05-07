@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{% if object %}Editar{% else %}Nueva{% endif %} incidencia</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+    <a href="{% url 'incidencia_list' %}" class="btn" style="background-color: #808080;">Cancelar</a>
+</form>
+{% endblock %}

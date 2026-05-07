@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align: center; padding: 50px 20px;">
+    <h1 style="font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;">
+        Sistema de Gestión de Préstamos de Material
+    </h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s;">
+            <h2 style="color: white; font-size: 1.8em; margin-bottom: 15px;">📦 Materiales</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Gestiona el inventario de materiales disponibles</p>
+            <a href="{% url 'material_list' %}" style="background: white; color: #667eea; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+                Ver Materiales
+            </a>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s;">
+            <h2 style="color: white; font-size: 1.8em; margin-bottom: 15px;">👥 Usuarios</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Administra estudiantes, empleados y departamentos</p>
+            <a href="{% url 'usuario_list' %}" style="background: white; color: #f5576c; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+                Ver Usuarios
+            </a>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s;">
+            <h2 style="color: white; font-size: 1.8em; margin-bottom: 15px;">📋 Préstamos</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Controla préstamos activos y devoluciones</p>
+            <a href="{% url 'prestamo_list' %}" style="background: white; color: #00f2fe; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+                Ver Préstamos
+            </a>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s;">
+            <h2 style="color: white; font-size: 1.8em; margin-bottom: 15px;">⚠️ Incidencias</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Reporta y gestiona daños o pérdidas</p>
+            <a href="{% url 'incidencia_list' %}" style="background: white; color: #fa709a; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+                Ver Incidencias
+            </a>
+        </div>
+
+    </div>
+
+    <div style="margin-top: 60px; padding: 30px; background: #34495e; border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <h3 style="color: white; margin-bottom: 15px;">🔧 Panel de Administración</h3>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">Accede al panel completo de Django Admin</p>
+        <a href="/admin/" style="background: #e74c3c; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+            Ir al Admin
+        </a>
+    </div>
+
+    <div style="margin-top: 50px; color: #95a5a6;">
+        <p>📅 Proyecto SGE - Reto 9 | 🎓 Egibide 2026</p>
+    </div>
+</div>
+
+<style>
+    div[style*="background: linear-gradient"]:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
+

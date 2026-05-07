@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Detalle de incidencia</h1>
+<ul>
+    <li><strong>Código:</strong> {{ object.codigo }}</li>
+    <li><strong>Fecha:</strong> {{ object.fecha }}</li>
+    <li><strong>Descripción:</strong> {{ object.descripcion }}</li>
+    <li><strong>Tipo de incidencia:</strong> {{ object.tipo_incidencia }}</li>
+    <li><strong>Préstamo asociado:</strong> <a href="{% url 'prestamo_detail' object.prestamo.pk %}">{{ object.prestamo.codigo }}</a></li>
+</ul>
+<a href="{% url 'incidencia_update' object.pk %}" class="btn">Editar</a>
+<a href="{% url 'incidencia_delete' object.pk %}" class="btn" style="background-color: #f44336;">Borrar</a>
+<a href="{% url 'incidencia_list' %}" class="btn" style="background-color: #008CBA;">Volver al listado</a>
+{% endblock %}

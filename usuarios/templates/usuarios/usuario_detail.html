@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Detalle de usuario</h1>
+<ul>
+    <li><strong>DNI:</strong> {{ object.dni }}</li>
+    <li><strong>Nombre:</strong> {{ object.nombre }}</li>
+    <li><strong>Apellidos:</strong> {{ object.apellidos }}</li>
+    <li><strong>Email:</strong> {{ object.email }}</li>
+    <li><strong>Teléfono:</strong> {{ object.telefono }}</li>
+    <li><strong>Tipo de usuario:</strong> {{ object.tipo_usuario }}</li>
+</ul>
+<a href="{% url 'usuario_update' object.pk %}">Editar</a> |
+<a href="{% url 'usuario_delete' object.pk %}">Borrar</a> |
+<a href="{% url 'usuario_list' %}">Volver al listado</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Confirmar borrado</h1>
+<p>¿Seguro que quieres borrar el usuario "{{ object.nombre }} {{ object.apellidos }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, borrar</button>
+    <a href="{% url 'usuario_list' %}">Cancelar</a>
+</form>
+{% endblock %}
