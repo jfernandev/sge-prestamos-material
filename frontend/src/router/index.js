@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import AdminPanel from '../views/AdminPanel.vue'
 import MaterialesList from '../views/MaterialesList.vue'
 import MaterialesForm from '../views/MaterialesForm.vue'
 import UsuariosList from '../views/UsuariosList.vue'
@@ -14,6 +15,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  // Panel de Administración
+  {
+    path: '/admin',
+    name: 'AdminPanel',
+    component: AdminPanel
   },
   // Materiales
   {

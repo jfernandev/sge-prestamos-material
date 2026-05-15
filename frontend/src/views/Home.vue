@@ -34,8 +34,8 @@
     <div class="admin-section">
       <div class="card">
         <h3>🔧 Panel de Administración</h3>
-        <p>Accede al panel completo de Django Admin</p>
-        <a href="http://localhost:8000/admin/" target="_blank" class="btn btn-primary">Ir al Admin</a>
+        <p>Accede al panel completo de gestión del sistema</p>
+        <router-link to="/admin" class="btn btn-primary">Ir al Panel Admin</router-link>
       </div>
     </div>
   </div>

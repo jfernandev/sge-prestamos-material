@@ -9,6 +9,7 @@
           <li><router-link to="/usuarios">👥 Usuarios</router-link></li>
           <li><router-link to="/prestamos">📋 Préstamos</router-link></li>
           <li><router-link to="/incidencias">⚠️ Incidencias</router-link></li>
+          <li><router-link to="/admin" class="admin-link">🔧 Admin</router-link></li>
         </ul>
       </div>
     </nav>

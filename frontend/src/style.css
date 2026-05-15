@@ -51,6 +51,17 @@ nav a:hover {
   opacity: 0.8;
 }
 
+nav a.admin-link {
+  background: rgba(255,255,255,0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+nav a.admin-link:hover {
+  background: rgba(255,255,255,0.3);
+  opacity: 1;
+}
+
 /* Contenedor principal */
 .container {
   max-width: 1200px;
