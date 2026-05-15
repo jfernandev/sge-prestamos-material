@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from datetime import date
 from materiales.models import Material
 from usuarios.models import Usuario
@@ -23,40 +22,17 @@ class Prestamo(models.Model):
         return f"Préstamo {self.codigo} - {self.material.nombre} a {self.usuario.nombre}"
     
     def clean(self):
-        """Validaciones personalizadas"""
+        """Validar que el material no esté ya prestado"""
         super().clean()
-        
-        # Validar que el material no esté ya prestado
-        if self.material:
+        if self.material and not self.pk:  # Solo al crear
             prestamos_activos = Prestamo.objects.filter(
                 material=self.material,
                 estado__in=['prestado', 'retrasado']
-            ).exclude(pk=self.pk if self.pk else None)
-            
+            )
             if prestamos_activos.exists():
                 raise ValidationError({
-                    'material': f'El material "{self.material.nombre}" ya está prestado actualmente.'
+                    'material': f'El material "{self.material.nombre}" ya está prestado.'
                 })
-    
-    def actualizar_estado(self):
-        """Actualiza el estado del préstamo según las fechas"""
-        if self.fecha_real_devolucion:
-            # Si ya fue devuelto
-            self.estado = 'devuelto'
-            self.material.estado = 'disponible'
-            self.material.save()
-        elif date.today() > self.fecha_prevista_devolucion:
-            # Si está retrasado
-            self.estado = 'retrasado'
-            self.material.estado = 'retrasado'
-            self.material.save()
-        else:
-            # Si está activo
-            self.estado = 'prestado'
-            self.material.estado = 'prestado'
-            self.material.save()
-        
-        self.save()
     
     def esta_retrasado(self):
         """Verifica si el préstamo está retrasado"""
@@ -70,20 +46,32 @@ class Prestamo(models.Model):
             return 0
         return (date.today() - self.fecha_prevista_devolucion).days
     
+    def actualizar_estado(self):
+        """Actualiza el estado del préstamo y material (sin recursión)"""
+        if self.fecha_real_devolucion:
+            nuevo_estado = 'devuelto'
+            estado_material = 'disponible'
+        elif self.esta_retrasado():
+            nuevo_estado = 'retrasado'
+            estado_material = 'retrasado'
+        else:
+            nuevo_estado = 'prestado'
+            estado_material = 'prestado'
+        
+        # Actualizar solo si cambió
+        if self.estado != nuevo_estado:
+            Prestamo.objects.filter(pk=self.pk).update(estado=nuevo_estado)
+            self.estado = nuevo_estado
+        
+        if self.material.estado != estado_material:
+            Material.objects.filter(pk=self.material.pk).update(estado=estado_material)
+            self.material.estado = estado_material
+    
     def save(self, *args, **kwargs):
-        """Override save para actualizar estados automáticamente"""
-        # Al crear un préstamo nuevo
         is_new = self.pk is None
-        
         if is_new:
-            # Validar que el material esté disponible
             self.full_clean()
-            # Actualizar estado del material a prestado
-            self.material.estado = 'prestado'
-            self.material.save()
-        
         super().save(*args, **kwargs)
-        
-        # Después de guardar, actualizar estado si es necesario
-        if not is_new:
-            self.actualizar_estado()
+        if is_new and self.material:
+            Material.objects.filter(pk=self.material.pk).update(estado='prestado')
+
