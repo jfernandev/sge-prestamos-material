@@ -26,8 +26,8 @@ class Command(BaseCommand):
                     retrasados_detectados += 1
                     self.stdout.write(
                         self.style.WARNING(
-                            f'⚠️  Préstamo {prestamo.codigo} RETRASADO: '
-                            f'{prestamo.dias_retraso()} días - '
+                            f'Préstamo {prestamo.codigo} retrasado: '
+                            f'{prestamo.dias_retraso()} día(s) - '
                             f'Material: {prestamo.material.nombre}'
                         )
                     )
@@ -35,17 +35,17 @@ class Command(BaseCommand):
         if actualizados > 0:
             self.stdout.write(
                 self.style.SUCCESS(
-                    f'\n✅ {actualizados} préstamo(s) actualizado(s)'
+                    f'\n{actualizados} préstamo(s) actualizado(s)'
                 )
             )
             if retrasados_detectados > 0:
                 self.stdout.write(
                     self.style.WARNING(
-                        f'⚠️  {retrasados_detectados} préstamo(s) retrasado(s) detectado(s)'
+                        f'{retrasados_detectados} préstamo(s) retrasado(s) detectado(s)'
                     )
                 )
         else:
             self.stdout.write(
-                self.style.SUCCESS('✅ Todos los préstamos están al día')
+                self.style.SUCCESS('Todos los préstamos están al día')
             )
 

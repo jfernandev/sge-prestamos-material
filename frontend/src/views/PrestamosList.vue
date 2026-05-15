@@ -135,9 +135,16 @@ export default {
   font-weight: 500;
 }
 
+/* Compatibilidad con estado antiguo "activo" */
 .badge-activo {
-  background: #e3f2fd;
-  color: #1565c0;
+  background: #fff3e0;
+  color: #e65100;
+}
+
+/* Estado actual "prestado" (naranja, como Materiales) */
+.badge-prestado {
+  background: #fff3e0;
+  color: #e65100;
 }
 
 .badge-devuelto {

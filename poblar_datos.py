@@ -12,15 +12,15 @@ from usuarios.models import Usuario
 from prestamos.models import Prestamo
 from incidencias.models import Incidencia
 
-print("🗑️  Limpiando datos existentes...")
+print("Limpiando datos existentes...")
 Incidencia.objects.all().delete()
 Prestamo.objects.all().delete()
 Material.objects.all().delete()
 Usuario.objects.all().delete()
-print("✅ Datos limpiados\n")
+print("Datos limpiados\n")
 
 # MATERIALES
-print("📦 Creando materiales...")
+print("Creando materiales...")
 materiales_data = [
     {"codigo": "LAP001", "nombre": "Laptop HP EliteBook", "categoria": "Informática", "estado": "disponible", "ubicacion": "Almacén A"},
     {"codigo": "LAP002", "nombre": "Laptop Dell Latitude", "categoria": "Informática", "estado": "disponible", "ubicacion": "Almacén A"},
@@ -37,11 +37,11 @@ materiales = []
 for data in materiales_data:
     m = Material.objects.create(**data)
     materiales.append(m)
-    print(f"  ✅ {m.codigo}: {m.nombre}")
-print(f"✅ {len(materiales)} materiales\n")
+    print(f"  - {m.codigo}: {m.nombre}")
+print(f"{len(materiales)} materiales\n")
 
 # USUARIOS
-print("👥 Creando usuarios...")
+print("Creando usuarios...")
 usuarios_data = [
     {"dni": "12345678A", "nombre": "Ana", "apellidos": "García López", "email": "ana@egibide.org", "telefono": "600111222", "tipo_usuario": "estudiante"},
     {"dni": "23456789B", "nombre": "Carlos", "apellidos": "Martínez", "email": "carlos@egibide.org", "telefono": "600222333", "tipo_usuario": "estudiante"},
@@ -56,11 +56,11 @@ usuarios = []
 for data in usuarios_data:
     u = Usuario.objects.create(**data)
     usuarios.append(u)
-    print(f"  ✅ {u.dni}: {u.nombre}")
-print(f"✅ {len(usuarios)} usuarios\n")
+    print(f"  - {u.dni}: {u.nombre}")
+print(f"{len(usuarios)} usuarios\n")
 
 # PRÉSTAMOS
-print("📋 Creando préstamos...")
+print("Creando préstamos...")
 hoy = date.today()
 prestamos_data = [
     {"codigo": "PRES001", "material": materiales[0], "usuario": usuarios[0], "fecha_prestamo": hoy - timedelta(days=5), "fecha_prevista_devolucion": hoy + timedelta(days=10), "estado": "prestado"},
@@ -77,11 +77,11 @@ for data in prestamos_data:
     if data['estado'] in ['prestado', 'retrasado']:
         Material.objects.filter(pk=mat.pk).update(estado=data['estado'])
     prestamos.append(p)
-    print(f"  ✅ {p.codigo}: {mat.nombre} → {p.usuario.nombre} [{p.estado}]")
-print(f"✅ {len(prestamos)} préstamos\n")
+    print(f"  - {p.codigo}: {mat.nombre} -> {p.usuario.nombre} [{p.estado}]")
+print(f"{len(prestamos)} préstamos\n")
 
 # INCIDENCIAS
-print("⚠️  Creando incidencias...")
+print("Creando incidencias...")
 incidencias_data = [
     {"codigo": "INC001", "fecha": hoy - timedelta(days=2), "descripcion": "Cable deteriorado", "tipo_incidencia": "daño", "prestamo": prestamos[0]},
     {"codigo": "INC002", "fecha": hoy - timedelta(days=5), "descripcion": "Funda extraviada", "tipo_incidencia": "pérdida", "prestamo": prestamos[2]},
@@ -89,14 +89,14 @@ incidencias_data = [
 ]
 for data in incidencias_data:
     i = Incidencia.objects.create(**data)
-    print(f"  ✅ {i.codigo}: {i.tipo_incidencia}")
-print(f"✅ {len(incidencias_data)} incidencias\n")
+    print(f"  - {i.codigo}: {i.tipo_incidencia}")
+print(f"{len(incidencias_data)} incidencias\n")
 
 print("=" * 50)
-print("🎉 BASE DE DATOS POBLADA")
-print(f"📦 Materiales: {Material.objects.count()}")
-print(f"👥 Usuarios: {Usuario.objects.count()}")
-print(f"📋 Préstamos: {Prestamo.objects.count()}")
-print(f"⚠️  Incidencias: {Incidencia.objects.count()}")
+print("BASE DE DATOS POBLADA")
+print(f"Materiales: {Material.objects.count()}")
+print(f"Usuarios: {Usuario.objects.count()}")
+print(f"Préstamos: {Prestamo.objects.count()}")
+print(f"Incidencias: {Incidencia.objects.count()}")
 print("=" * 50)
 

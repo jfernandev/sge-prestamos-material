@@ -1,14 +1,14 @@
-# 🏢 SGE - Sistema de Gestión de Préstamos de Material
+# SGE - Sistema de Gestión de Préstamos de Material
 
 **Proyecto Reto 9 - Egibide 2026**
 
-> ⚠️ **PROYECTO MIGRADO:** Arquitectura API REST + Vue.js (7 Mayo 2026)
+**Arquitectura:** API REST (Django) + Frontend (Vue.js)
 
 Aplicación web moderna desarrollada con **Django REST Framework** (backend) y **Vue.js 3** (frontend) para la gestión de préstamos y devoluciones de material dentro de una organización.
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio rápido
 
 ### Ejecutar el proyecto (necesitas 2 terminales):
 
@@ -24,29 +24,28 @@ cd frontend
 npm run dev
 ```
 
-📱 **Abrir:** http://localhost:5173/
+Abrir: http://localhost:5173/
 
 ---
 
-## 📚 Documentación Completa
+## Documentación
 
-- 📖 **[MIGRACION_COMPLETADA.md](./MIGRACION_COMPLETADA.md)** - Detalles técnicos de la migración
-- 📖 **[frontend/README.md](./frontend/README.md)** - Guía completa de instalación y uso
-- 📖 **[documentacion/funcionalidades.md](./documentacion/funcionalidades.md)** - Funcionalidades del sistema
-
----
-
-## 🎯 Funcionalidades
-
-- ✅ Gestión de materiales (CRUD completo)
-- ✅ Gestión de usuarios (CRUD completo)
-- ✅ Gestión de préstamos con control de fechas
-- ✅ Registro de incidencias (daños, pérdidas)
-- ✅ API REST completa
-- ✅ Interfaz moderna con Vue.js
+- **[frontend/README.md](./frontend/README.md)** - Guía de instalación y ejecución del frontend
+- **[documentacion/funcionalidades.md](./documentacion/funcionalidades.md)** - Funcionalidades del sistema
 
 ---
 
-## 👥 Equipo
+## Funcionalidades
 
-**Jon Herrera** | Egibide 2026 🎓
+- Gestión de materiales (CRUD)
+- Gestión de usuarios (CRUD)
+- Gestión de préstamos y devoluciones
+- Registro de incidencias
+- API REST (Django REST Framework)
+- Frontend SPA (Vue.js)
+
+---
+
+## Equipo
+
+**Jon Herrera y Joseba Fernández** | SGE-DAM Egibide 2026 
